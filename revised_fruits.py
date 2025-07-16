@@ -13,41 +13,34 @@ lemon_group = pygame.sprite.Group()
 
 
 class Fruits(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("fruits.png")
+    def __init__(self, groups):
+        super().__init__(groups)
+        self.image = pygame.image.load("fruits.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=(random.randint(0, WINDOW_WIDTH-64),random.randint(0, WINDOW_HEIGHT-64)))
 
 class Lemon(Fruits):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,groups):
+        super().__init__(groups)
         self.image = pygame.image.load("lemon64.png")
 
         
 
 for i in range(5):
-    #method 1+++++++++++++++++++++++++
-    # fruit = Fruits()
-    # fruits_group.add(fruit)
+    # #method 1+++++++++++++++++++++++++
+    # fruit = Fruits(fruits_group)
+
+    # #+++++++++++++++++++++++++++++++++
+    #method 2+++++++++++++++++++++++++
+    Fruits(fruits_group)
+
     #+++++++++++++++++++++++++++++++++
 
-    #method 2*************************
-    #fruits_group.add(Fruits())
-    #*********************************
-
-    #metho 3 =========================
-    #Fruits().add(fruits_group)
-    #=================================
-
-    #method 4+++++++++++++++++++++++++
-    fruit = Fruits()
-    fruit.add(fruits_group)
-    #+++++++++++++++++++++++++++++++++
+ 
 
     print(len(fruits_group))
 
 for i in range(3):
-    Lemon().add([lemon_group, fruits_group])
+    Lemon([lemon_group, fruits_group])
 
     print(len(fruits_group))
     print(len(lemon_group))
