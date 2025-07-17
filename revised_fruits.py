@@ -1,14 +1,10 @@
 import pygame
 import random
 
-pygame.init()
 
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-fruits_group = pygame.sprite.Group()
-lemon_group = pygame.sprite.Group()
+
+
 
 
 
@@ -23,6 +19,15 @@ class Lemon(Fruits):
         super().__init__(groups)
         self.image = pygame.image.load("lemon64.png")
 
+
+pygame.init()
+
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+fruits_group = pygame.sprite.Group()
+lemon_group = pygame.sprite.Group()
         
 
 for i in range(5):
