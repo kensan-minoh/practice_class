@@ -3,20 +3,15 @@ import random
 
 # difine classed
 class Game():
-    def __init__(self):
-        pass
+    def __init__(self, knight_group, monster_group):
+        self.knight_group = knight_group
+        self.monster_group = monster_group
 
-    def update(self, group1, group2):
-        self.check_collisions(group1, group2)
+    def update(self):
+        self.check_collisions()
 
-    def check_collisions(self, group1, group2):
-        pygame.sprite.groupcollide(group1, group2, False, True)
-
-
-
-
-
-
+    def check_collisions(self):
+        pygame.sprite.groupcollide(self.knight_group, self.monster_group, False, True)
 
 class Monster(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -38,12 +33,10 @@ class Knight(pygame.sprite.Sprite):
     def update(self):
         self.rect.y -= self.velocity
 
+
+
 # initialize pygame
 pygame.init()
-
-
-
-
 
 # create a display surface
 WINDOW_WIDTH = 800
@@ -55,18 +48,18 @@ pygame.display.set_caption('Group Collide')
 FPS = 60
 clock = pygame.time.Clock()
 
-monster_group = pygame.sprite.Group()
-knight_group = pygame.sprite.Group()
+my_monster_group = pygame.sprite.Group()
+my_knight_group = pygame.sprite.Group()
 
-my_game = Game()
+my_game = Game(my_knight_group, my_monster_group)
 
 for i in range(10):
     x = i * 65
     y = 10
     monster = Monster(x, y)
-    monster_group.add(monster)
+    my_monster_group.add(monster)
     knight = Knight(x, WINDOW_HEIGHT-80)
-    knight.add(knight_group)
+    knight.add(my_knight_group)
     
 
 # main game loop
@@ -81,12 +74,12 @@ while running:
     display_surface.fill('black')
 
     # blit monsters and knights
-    my_game.update(knight_group, monster_group)
+    my_game.update()
 
-    monster_group.update()
-    knight_group.update()
-    monster_group.draw(display_surface)
-    knight_group.draw(display_surface)
+    my_monster_group.update()
+    my_knight_group.update()
+    my_monster_group.draw(display_surface)
+    my_knight_group.draw(display_surface)
 
     pygame.display.update()
 
